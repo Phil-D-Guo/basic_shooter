@@ -8,7 +8,7 @@ canvas.height = 800;
 const player = {
     x: canvas.width / 2 - 20,
     y: canvas.height - 60,
-    width: 20,
+    width: 10,
     height: 20,
     speed: 4,
     bullets: [],
