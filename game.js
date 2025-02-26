@@ -76,8 +76,8 @@ function movePlayer() {
     
     // Shooting bullets
     if (keys.z && player.cooldown === 0) {
-        player.bullets.push({ x: player.x + player.width / 2 - 2, y: player.y, width: 4, height: 10, speed: 6 });
-        player.cooldown = 10; // Delay between shots
+        player.bullets.push({ x: player.x + player.width / 2 - 2, y: player.y, width: 4, height: 10, speed: 16 });
+        player.cooldown = 2; // Delay between shots
     }
 
     if (player.cooldown > 0) player.cooldown--;
