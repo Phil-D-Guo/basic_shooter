@@ -10,7 +10,7 @@ const player = {
     y: canvas.height - 60,
     width: 10,
     height: 20,
-    speed: 4,
+    speed: 6,
     bullets: [],
     cooldown: 0
 };
