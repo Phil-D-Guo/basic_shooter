@@ -2,15 +2,15 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 800;
 
 // Player setup
 const player = {
     x: canvas.width / 2 - 20,
     y: canvas.height - 60,
-    width: 40,
-    height: 40,
-    speed: 5,
+    width: 20,
+    height: 20,
+    speed: 4,
     bullets: [],
     cooldown: 0
 };
@@ -18,11 +18,15 @@ const player = {
 // Enemy setup
 const enemies = [];
 const enemySpeed = 2;
-const enemySpawnRate = 100; // Higher number = slower spawn
+const enemySpawnRate = 80; // Higher number = slower spawn
 let frameCount = 0;
 
 // Controls
-const keys = { ArrowLeft: false, ArrowRight: false, ArrowUp: false, ArrowDown: false, z: false };
+const keys = { ArrowLeft: false, 
+               ArrowRight: false, 
+               ArrowUp: false, 
+               ArrowDown: false, 
+               z: false };
 
 // Event listeners for key controls
 window.addEventListener("keydown", (e) => {
@@ -30,6 +34,23 @@ window.addEventListener("keydown", (e) => {
 });
 window.addEventListener("keyup", (e) => {
     if (e.key in keys) keys[e.key] = false;
+});
+
+// Touch controls: Move player directly to finger
+canvas.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    player.x = touch.clientX - rect.left - player.width / 2;
+    player.y = touch.clientY - rect.top - player.height / 2;
+    e.preventDefault(); // Prevent scrolling
+});
+
+// Tap to shoot
+canvas.addEventListener("touchstart", () => {
+    keys.z = true;
+});
+canvas.addEventListener("touchend", () => {
+    keys.z = false;
 });
 
 // Game Loop
